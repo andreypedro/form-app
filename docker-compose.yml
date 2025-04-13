@@ -1,8 +1,8 @@
-version: "4.12.0"
+version: "1.0.0"
 
 services:
   database:
-    container_name: vial-backend-b
+    container_name: backend-database
     image: postgres:latest
     environment:
       POSTGRES_USER: vial
@@ -11,10 +11,10 @@ services:
     ports:
       - 5432:5432
   nodeserver:
-    container_name: vial-backend-b-api
+    container_name: backend-api
     image: node:18.15.0
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile.local
     command: npm run dev
     volumes:
@@ -26,3 +26,16 @@ services:
       - database
     ports:
       - 8080:8080
+  frontend:
+    container_name: frontend-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.local
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    environment:
+      - CHOKIDAR_USERPOLLING=true
+    volumes:
+      - ./frontend:/usr/app/
