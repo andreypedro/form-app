@@ -90,7 +90,7 @@ export default function FormViewer({ name, fields }: FormViewerProps) {
               onChange={(e) => handleChange(field.question, e.target.value)}
             />
           )}
-          {field.type === "datetime" && (
+          {field.type === "date" && (
             <input
               type="date"
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
