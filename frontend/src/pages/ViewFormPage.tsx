@@ -28,7 +28,6 @@ export default function ViewFormPage() {
 
         const data = response.data as any;
 
-        console.log(data.data);
         setFormName(data.data.name);
         setFields(data.data.fields);
       } catch (error) {

@@ -21,10 +21,6 @@ export default function HomePage() {
   return (
     <>
       <h1 className="text-2xl font-bold mb-4">Welcome to the Form Builder</h1>
-      <p className="mb-4">
-        This is a simple form builder application. You can create, view, and
-        manage your forms.
-      </p>
       <p>Select a form bellow to answer.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
         {forms.map((form: any) => (
