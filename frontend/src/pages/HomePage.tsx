@@ -30,8 +30,10 @@ export default function HomePage() {
         {forms.map((form: any) => (
           <Link to={`/form/${form.id}`} key={form.id} className="no-underline">
             <div key={form.id} className="bg-white p-4 rounded shadow">
-              <h2 className="text-xl font-semibold mb-2">{form.name}</h2>
-              <p>Click to fill out the questions.</p>
+              <h2 className="text-xl font-semibold mb-2 text-blue-500">
+                {form.name}
+              </h2>
+              <p>Click to fill out the form.</p>
             </div>
           </Link>
         ))}
