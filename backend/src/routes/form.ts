@@ -10,6 +10,7 @@ async function formRoutes(app: FastifyInstance) {
 
   const log = app.log.child({ component: "formRoutes" });
 
+  // GET form by id
   app.get<{
     Params: IEntityId;
     Reply: Form;
@@ -28,6 +29,28 @@ async function formRoutes(app: FastifyInstance) {
     },
   });
 
+  // GET all forms
+  app.get<{
+    Reply: Form[];
+  }>("/", {
+    async handler(req, reply) {
+      log.debug("get all forms");
+      try {
+        const forms = await prisma.form.findMany({
+          orderBy: {
+            name: "asc",
+          },
+        });
+
+        reply.send(forms);
+      } catch (err: any) {
+        log.error({ err }, err.message);
+        throw new ApiError("failed to fetch forms", 400);
+      }
+    },
+  });
+
+  // POST create form
   app.post<{
     Body: Form;
     Reply: Form;
@@ -50,6 +73,7 @@ async function formRoutes(app: FastifyInstance) {
     },
   });
 
+  // POST submit form answers
   app.post<{
     Params: IEntityId;
     Body: { answers: { [key: string]: string } };
